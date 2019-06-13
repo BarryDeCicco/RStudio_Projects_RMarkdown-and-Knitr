@@ -1,0 +1,61 @@
+---
+title: "Tables"
+author: "Barry DeCicco"
+date: "June 6, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(knitr)
+```
+
+## R Markdown
+
+In his Knitr in a Knutshell, Dr. Karl Broman introduces: kable, pander, and xtable and I have especially enjoyed using the first two:
+
+kable: Within the knitr package - not many options but looks nice with ease.
+pander: Within the pander package - has many more options and customization. Useful for bold-ing certain values (e.g. values below a threshold).
+kable and pander tables are nice as they are useful for making non-interactive tables.
+xtable gives more control.
+DT gives interactivity.
+
+```{r kable_1}
+
+kable(head(mtcars, n = 4)) # kable table with 4 rows
+
+```
+
+
+
+
+```{r pander_table_1, echo=TRUE}
+
+# Pander table
+# install.packages("pander") # install pander first
+library(pander)
+pander(head(mtcars, n = 4))
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+```{r data_table_1}
+
+# DT table = interactive
+# install.packages("DT") # install DT first - already done.
+library(DT)
+datatable(head(mtcars, n = nrow(mtcars)), options = list(pageLength = 5)) 
+
+```
+```{r xtable_1} 
+
+# xtable gives more control.
+
+
+
+
+```
+

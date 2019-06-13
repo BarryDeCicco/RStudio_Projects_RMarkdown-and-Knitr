@@ -1,0 +1,45 @@
+---
+title: "Testing R Code Chunks"
+author: "Barry DeCicco"
+date: "June 6, 2017"
+output: html_document
+---
+
+```{r setup}
+
+
+
+knitr::opts_chunk$set(echo = TRUE,  tidy=TRUE, warning=TRUE, error=TRUE,
+                      message=TRUE)
+
+```
+
+
+
+````{r 10-random-numbers}
+n <- 10
+seq(n)
+
+````
+
+
+```{r random_normals}
+x <- rnorm(100)  
+y <- 2*x + rnorm(100)
+x
+y
+
+```
+
+```{r histogram_mtcars,fig.align = "center", fig.width=4, fig.height=3}
+
+
+library(ggplot2)
+
+ggplot(mtcars, aes(x = mpg)) + xlab("Miles per Gallon") +
+    geom_histogram(bins = 30, fill = "cornflowerblue", color = "black") +
+    geom_vline(xintercept=mean(mtcars$mpg), col="red") 
+
+    
+```
+

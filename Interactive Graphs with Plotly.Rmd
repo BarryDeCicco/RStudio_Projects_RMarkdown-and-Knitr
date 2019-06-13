@@ -1,0 +1,34 @@
+---
+title: "Interactive Graphs with Plotly"
+author: "Barry DeCicco"
+date: "June 6, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+## Interactive Graphs with Plotly
+
+You can also embed plots, for example:
+
+```{r plotly_1, echo=TRUE}
+
+
+library(plotly)
+
+mtcars$car <- row.names(mtcars)
+
+
+
+plot_ly(mtcars, x = ~wt, y = ~mpg,  type='scatter',
+        text = ~paste("Car: ", car),
+        mode = "markers", color = ~wt, size = ~wt)
+
+
+```
+

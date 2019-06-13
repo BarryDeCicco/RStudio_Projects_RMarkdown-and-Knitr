@@ -1,0 +1,58 @@
+---
+title: "Fourth Attempt at SAS"
+author: "Barry DeCicco"
+date: "May 28, 20018"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+THE R COMMANDS BELOW WILL WORK, SINCE SAS IS ONLY SET UP ON A BY-CHUNK LEVEL.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+install.packages("ggExtra", repos="REPOLINK")
+
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r, engine='sas', engine.path="C:/Program Files/SASHome/SASFoundation/9.4/sas.exe", engine.opts="-nosplash -linesize 75", comment=""}
+proc means data=sashelp.class;
+run;
+
+proc freq data=sashelp.class;
+    tables sex;
+run;
+```
+
+
+```{r histo, echo=TRUE}
+
+# Pander table
+# install.packages("pander") # install pander first
+# load package and data
+library(ggplot2)
+library(ggExtra)
+data(mpg, package="ggplot2")
+# mpg <- read.csv("http://goo.gl/uEeRGu")
+
+# Scatterplot
+theme_set(theme_bw())  # pre-set the bw theme.
+mpg_select <- mpg[mpg$hwy >= 35 & mpg$cty > 27, ]
+g <- ggplot(mpg, aes(cty, hwy)) + 
+  geom_count() + 
+  geom_smooth(method="lm", se=F)
+
+ggMarginal(g, type = "histogram", fill="transparent")
+ggMarginal(g, type = "boxplot", fill="transparent")
+# ggMarginal(g, type = "density", fill="transparent")
+
+```
+
+
